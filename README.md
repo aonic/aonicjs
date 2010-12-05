@@ -13,7 +13,6 @@ Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) 
 ## Examples
 
 #### Using the Push Communication Framework
-<script src="https://gist.github.com/728800.js?file=gistfile1.html"></script>
 
 	<embed width="0" height="0" allowscriptaccess="always" name="flashSock" id="flashSock" 
 	src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>
