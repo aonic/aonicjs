@@ -6,13 +6,13 @@ The Push Communication framework uses Flash's XMLSocket object as a middle layer
 
 ## Real Usage Example
 
-### Photos.cx's Photos Spy (now offline)
+#### Photos.cx's Photos Spy (now offline)
 
 Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) and [photos_sender.py](https://github.com/aonic/aonicjs/blob/master/python/photos_sender.py) along with the [Effects and Push framework](https://github.com/aonic/aonicjs/blob/master/js/AONIC.Com.js) to notify users of new public uploads. Featured real-time chat room used to discuss new uploads with other users. [Custom front-end code](https://github.com/aonic/aonicjs/blob/master/examples/photoscx-recent.html)
 
 ## Examples
 
-### Using the Push Communication Framework
+#### Using the Push Communication Framework
 
 	<embed width="0" height="0" allowscriptaccess="always" name="flashSock" id="flashSock" 
 	src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>
@@ -33,7 +33,7 @@ Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) 
 		fs.send('John Doe.'); // -> alert('Server said: Welcome John Doe!');
 	</script>
 
-### Using the Effects Framework
+#### Using the Effects Framework
 
 	<div id="photoBox" style="height:0; overflow:hidden;">
 		<img src="../photo.jpg" />
@@ -43,11 +43,11 @@ Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) 
 		new AONIC.api.Effects('photoBox', 0, 300, 'height', {duration:300}).slide();
 	</script>
 
-### Quick and Dirty Chat Room using chatd.py and Push Framework
+#### Quick and Dirty Chat Room using chatd.py and Push Framework
 
-Start the server: **`python chatd.py`**
+Start the server: `**python chatd.py**`
 
-Webpage:
+**Webpage:**
 
 	<embed width="0" height="0" allowscriptaccess="always" name="flashSock" id="flashSock" 
 	src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>
