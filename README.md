@@ -1,3 +1,17 @@
+Summary
+========
+
+JavaScript framework designed primarily for asynchronous push communication with custom servers (comet). Python back-end examples included, as well as a basic JavaScript effects library, and ActionScript source for handling the active connections.
+
+The Push Communication framework uses Flash's XMLSocket object as a middle layer. Sample back-end servers included are written in Twisted. Twisted is an event-driven networking engine written in Python
+
+Real Usage Example
+========
+
+## Photos.cx's Photos Spy (now offline)
+
+Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) and [photos_sender.py](https://github.com/aonic/aonicjs/blob/master/python/photos_sender.py) along with the [Effects and Push framework](https://github.com/aonic/aonicjs/blob/master/js/AONIC.Com.js) to notify users of new public uploads. Featured real-time chat room used to discuss new uploads with other users. [Custom front-end code](https://github.com/aonic/aonicjs/blob/master/examples/photoscx-recent.html)
+
 Examples
 ========
 
@@ -34,9 +48,9 @@ Examples
 
 ## Quick and Dirty Chat Room using chatd.py and Push Framework
 
-### Start the server: python chatd.py
+Start the server: **`python chatd.py`**
 
-### Webpage:
+Webpage:
 
 	<embed width="0" height="0" allowscriptaccess="always" name="flashSock" id="flashSock" 
 	src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>
