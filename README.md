@@ -45,9 +45,9 @@ Used [photos.py](https://github.com/aonic/aonicjs/blob/master/python/photos.py) 
 
 #### Quick and Dirty Chat Room using chatd.py and Push Framework
 
-Start the server: `**python chatd.py**`
+Start the server: `python chatd.py`
 
-**Webpage:**
+#### Webpage
 
 	<embed width="0" height="0" allowscriptaccess="always" name="flashSock" id="flashSock" 
 	src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>
