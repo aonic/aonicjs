@@ -1,6 +1,6 @@
 /**
  * Beginnings of a AONIC Framework.
- * (c) 2007 - 2008 Raja Kapur <raja@aonic.net>
+ * (c) 2007 - 2008 Raja Kapur <raja.kapur@gmail.com>
  * 
  * The AONIC Framework is freely distributable under the terms of the MIT License.
  * See http://framework.aonic.net/ for details.
@@ -39,7 +39,7 @@ Function.prototype.bind = function() {
 
 /**	
  * Basic JS effects library.
- * (c) 2007 - 2008 Raja Kapur <raja@aonic.net>
+ * (c) 2007 - 2008 Raja Kapur <raja.kapur@gmail.com>
  *
  * @example
  * 	new AONIC.api.Effects('photoBox', 0, 300, 'height', {duration:300}).slide()
@@ -89,7 +89,7 @@ AONIC.api.Effects.prototype.sineInOut = function() { return -this.change/2 * (Ma
 
 /**	
  * Push Communication Framework
- * (c) 2007 - 2008 Raja Kapur <raja@aonic.net>
+ * (c) 2007 - 2008 Raja Kapur <raja.kapur@gmail.com>
  *
  * Recieves push updates from servers. Uses Flash's XMLSocket object as middle layer.
  * 
