@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>AONIC</title>
+	
+	<script type="text/javascript" src="../js/swfobject.js"></script>
+	<script type="text/javascript" src="../js/AONIC.Com.js"></script>
+	<link rel="stylesheet" href="./photoscx-style.css" media="all" type="text/css" />
+</head>
+
+<body>
+
+	<div id="flashcontent"></div>
+	<script type="text/javascript">
+		new SWFObject("../swf/jsCom.swf", "flashSock", "0", "0", "8.0.0", "#000").write("flashcontent");
+	</script>
+	<!--<embed width="0" height="0" allowscriptaccess="always" quality="high" bgcolor="#000" name="flashSock" id="flashSock" src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>-->
+
+	<table cellspacing="0" cellpadding="0" border="0" width="100%" id="recent-wrapper">
+		<tr><td valign="top" align="center" colspan="2" style="padding-bottom: 10px"><!--0A1633-->
+			<h4 style="padding:0;margin:5px">Photos.CX Photos Spy [  <a target="_blank" href="http://e.photos.cx/NewPhotosServerPush-f2b.png">How this works</a> ]</h4>
+			Use the chat to discuss new uploads and anything funny
+		</td></tr>
+		<tr><td valign="top" width="500">
+			<div id="recent">
+				<h3 id="loading-photos">Loading Photos...</h3>
+			</div>
+		</td><td valign="top">
+			<div id="chat">
+				<div>
+					<form style="display:inline;margin:0;padding:0;" onsubmit="fs.sendMessage(AONIC.$('message')); return false;">
+					<input type="text" id="message" name="message" /></form>
+					<span class="user" style="padding-left: 5px">Name:</span> <input type="text" id="username" onkeyup="fs.newUsername(this.value)" value="anon" />
+				</div>
+				<div id="lines">
+					<h3 id="loading-chat">Loading Chat...</h3>
+					<div class="line"><span class="user">say something!</span></div>
+				</div>
+			</div>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+	var fs;
+	var cookie = document.cookie.match(new RegExp('(^|;)\\s*' + escape('username') + '=([^;\\s]*)'));
+	AONIC.$('username').value = (cookie ? unescape(cookie[2]) : 'anon' + Math.round(Math.random()*10000));
+	
+	window.onload = function() {
+		// safari needs a little more time
+		setTimeout((function() {
+			fs = new AONIC.api.PushCommunication('localhost', '1620', 'flashSock');
+			fs.effects = false;
+	
+			fs.addCallback('onData', function(msg) {
+				var data = msg.split(':-');
+				if(data[0].charAt(0) != ':') return;
+				try {
+					var command = data[0].substr(1);
+					var msg = msg.substr(data[0].length + 2);
+				}
+				catch(e) {
+					alert(e);
+				}
+
+				switch(command){
+					case 'username':
+						fs.username = msg;
+						var d = new Date();
+						d.setTime(d.getTime() + (86400000 * parseFloat(30)));
+						document.cookie = 'username='+unescape(msg)+' ; expires=' + d.toGMTString();
+				
+						// username is sent after all the "recent history" data
+						fs.effects = true;
+						AONIC.$('loading-photos').style.display = 'none';
+						AONIC.$('loading-chat').style.display = 'none';
+					break;
+			
+					case 'photo':
+						var data = eval('(' + msg + ')');
+						AONIC.$('recent').innerHTML = '<div id="photo_'+data.number+'" style="'+(fs.effects ? 'margin-top:-40px' : '')+'" class="new-upload">\n' +
+															'<img class="thumbnail" src="'+data.thumb+'" />\n' +
+																'<p><a target="_blank" class="view" href="'+data.link+'">'+data.filename+'</a> <br /> <span class="number"> upload '+data.number+'</span></p>\n' +
+													  '</div>\n' + AONIC.$('recent').innerHTML;
+				
+						if(fs.effects)
+						new AONIC.api.Effects('photo_'+data.number, -40, 2, 'marginTop', {duration:300, onComplete: function(){
+							var photos = AONIC.$('recent').getElementsByTagName('div');
+							if(photos.length > 8)
+								photos[photos.length-1].parentNode.removeChild(photos[photos.length-1]);
+						}}).slide();
+					break;
+			
+					case 'chat':
+						var data = eval('(' + msg + ')');
+						fs.addChatLine(data.user, data.message);
+					break;
+				}
+		    });
+			/*.addCallback('onClose', function() {
+				AONIC.$('status').className = 'closed';
+			});*/
+	
+			fs.sendCommand = function(cmd, msg, string_return) {
+				msg = escape(msg.replace(/\</g, '&lt;').replace(/\>/g, '&gt;'));
+				var send = ':' + cmd + ':-' + msg;
+				return (typeof(string_return) == 'undefined' ? this.send(send) : send);
+			};
+			fs.addChatLine = function(user, msg) {
+				user = unescape(user.replace(/\</g, '&lt;').replace(/\>/g, '&gt;'));
+				msg = unescape(msg.replace(/\</g, '&lt;').replace(/\>/g, '&gt;'));
+				AONIC.$('lines').innerHTML = '<div class="line"><span class="user">' + user + '&gt;</span> ' + msg + '</div>\n' + AONIC.$('lines').innerHTML;
+			};
+			fs.sendMessage = function(input) {
+				msg = input.value;
+				if(this.username.length > 0 && msg.length > 0) {
+					this.sendCommand('chat', msg);
+					this.addChatLine(this.username, msg);
+					input.value = '';
+				}
+			}
+			fs.newUsername = function(name) {
+				if(name.length > 0) {
+					if(this.userTimeout != null)
+						window.clearTimeout(this.userTimeout);
+					this.userTimeout = window.setTimeout(function(){ fs.sendCommand('username', name); }, 500);
+				}
+			}
+			
+			fs.newUsername(AONIC.$('username').value);
+		}), 100);
+	}
+	</script>
+
+</body>
+</html>

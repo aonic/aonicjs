@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>AONIC</title>
+
+	<script type="text/javascript" src="../js/AONIC.Com.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript" src="../js/swfobject.js"></script>
+	<div id="flashcontent"></div>
+	<script type="text/javascript">
+		new SWFObject("../swf/jsCom.swf", "flashSock", "0", "0", "8.0.0", "#000").write("flashcontent");
+	</script>
+	<!--<embed width="0" height="0" allowscriptaccess="always" quality="high" bgcolor="#000" name="flashSock" id="flashSock" src="./swf/jsCom.swf" type="application/x-shockwave-flash"></embed>-->
+	
+	<textarea readonly="readonly" id="chat" style="width: 600px; height: 150px; border: 0; font: 12px Arial; overflow: hidden;">Enter a username in the input.</textarea>
+    <form onsubmit="fs.sendMessage(AONIC.$('input')); return false;">
+    	<input type="text" id="input" style="width: 400px; font: 12px Arial;" />
+    </form>
+
+	<script type="text/javascript">
+		var fs;
+		window.onload = function() {
+			// safari needs a little more time
+			setTimeout((function() {
+				fs = new AONIC.api.PushCommunication('localhost', '3002', 'flashSock');
+			
+				fs.addLine = function(line) {
+					if(line.length == 0) return;
+					AONIC.$('chat').value += '\n'+line;
+					AONIC.$('chat').scrollTop = AONIC.$('chat').scrollHeight;
+				};
+				fs.sendMessage = function(input) {
+					var msg = input.value;
+					if(msg.length == 0) return;
+					input.value = '';
+			
+					this.send(msg);
+					if(!this.username) {
+						this.username = msg;
+						return;
+					}
+					this.addLine(this.username + '> ' + msg);
+				};
+			
+				fs.addCallback('onData', fs.addLine);
+			}), 100);
+		};
+	</script>
+</body>
+</html>

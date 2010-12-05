@@ -1,0 +1,94 @@
+body {
+	background-color: #48587D;
+	color: #C9C9C9;
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 10pt;
+	margin: 0;
+	padding: 0;
+}
+#recent-wrapper {
+	margin-top: 6%;
+	background-color: #5F73A3;
+	border-bottom: 1px solid #EEEEEE;
+	border-top: 1px solid #EEEEEE;
+	clear: both;
+	color: #EEEEEE;
+	font-size: 10pt;
+	padding: 5px;
+}
+
+div#recent {
+	width: 400px;
+	/*margin: 0 auto;
+	float: left;*/
+	margin-left: 100px;
+	overflow: hidden;
+}
+div#recent .new-upload {
+	padding: 5px 3px;
+	margin: 2px 0;
+	background-color: #465A8C;
+	clear: both;
+	overflow: hidden;
+}
+div#recent .new-upload img.thumbnail {
+	float: left;
+	width: 100px;
+}
+div#recent .new-upload p {
+	margin: 0 0 0 105px;
+	padding: 0;
+	text-align: left;
+}
+div#recent .new-upload p a.view {
+	font-size: 16px;
+	color: #0A1633; /*#95ACE6;*/
+}
+div#recent .new-upload p span.number {
+	font-size: 11px;
+	color: #7D8CB3;
+	font-weight: normal;
+}
+
+div#chat {
+	margin-left: 10px;
+	margin-right: 40px;
+	margin-top: 2px;
+	padding-bottom: 3px;
+	text-align: left;
+	background-color: #2F436F;
+	color: #82B4D9;
+}
+div#chat input {
+	background-color: #4F6497;
+	border: 2px solid #2F436F;
+	padding: 3px;
+}
+div#chat #message {
+	color: #000;
+	padding-left: 5px;
+	width: 300px;
+	font: 12px Arial, sans-serif;
+	float: left;
+}
+div#chat #username {
+	color: #000;
+	padding-left: 5px;
+	width: 110px;
+	font: 12px Arial, sans-serif;
+}
+div#chat #lines {
+	height: 390px;
+	overflow: hidden;
+	padding-left: 5px;
+}
+div#chat div.line {
+	font: 12px Arial, sans-serif;
+	line-height: 14px;
+	margin: 1px;
+}
+div#chat span.user {
+	font-weight: normal;
+	font-size: 12px;
+	color: #5CABE6;
+}
